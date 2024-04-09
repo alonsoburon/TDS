@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2ehv623tt8j2"]
+[gd_scene load_steps=8 format=3 uid="uid://b2ehv623tt8j2"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_xptho"]
 [ext_resource type="Texture2D" uid="uid://dos7yd2lp7akd" path="res://Assets/Graphics/Sword.png" id="2_fw47l"]
@@ -30,39 +30,23 @@ animations = [{
 radius = 24.0
 height = 74.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_flh22"]
-size = Vector2(5, 19.865)
-
 [node name="Main" type="Node2D"]
 texture_filter = 1
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(117, 78)
-collision_layer = 3
 script = ExtResource("1_xptho")
 
 [node name="player_sprite" type="AnimatedSprite2D" parent="Player"]
-scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_uttpa")
 animation = &"idle"
-frame_progress = 0.426901
+frame_progress = 0.33821
 
-[node name="player_collision" type="CollisionShape2D" parent="Player"]
+[node name="player_colshape2d" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_qd7qo")
 
-[node name="sword" type="CharacterBody2D" parent="Player"]
-position = Vector2(120, 0)
-collision_layer = 12
-
-[node name="sword_sprite" type="Sprite2D" parent="Player/sword"]
-position = Vector2(-50.685, 2.355)
-rotation = 1.5708
+[node name="sword_sprite" type="Sprite2D" parent="Player"]
+position = Vector2(40, -29)
 scale = Vector2(5, 5)
 texture = ExtResource("2_fw47l")
-
-[node name="sword_collision" type="CollisionShape2D" parent="Player/sword"]
-position = Vector2(-46.735, 0.05)
-rotation = 1.5708
-scale = Vector2(5, 5)
-shape = SubResource("RectangleShape2D_flh22")
