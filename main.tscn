@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2ehv623tt8j2"]
+[gd_scene load_steps=12 format=3 uid="uid://b2ehv623tt8j2"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_xptho"]
 [ext_resource type="Texture2D" uid="uid://dos7yd2lp7akd" path="res://Assets/Graphics/Sword.png" id="2_fw47l"]
 [ext_resource type="Texture2D" uid="uid://c3hy712ti0cb8" path="res://Assets/Graphics/Player-Sheet.png" id="2_xgo2u"]
+[ext_resource type="Texture2D" uid="uid://bld18dh4athxi" path="res://Assets/Graphics/Enemy.png" id="4_4iow3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gcvb5"]
 atlas = ExtResource("2_xgo2u")
@@ -33,12 +34,27 @@ height = 74.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_flh22"]
 size = Vector2(5, 19.865)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_f7ng8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_4iow3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nsxkj"]
+radius = 5.0
+
 [node name="Main" type="Node2D"]
 texture_filter = 1
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(117, 78)
-collision_layer = 3
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_xptho")
 
 [node name="player_sprite" type="AnimatedSprite2D" parent="Player"]
@@ -52,17 +68,31 @@ position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_qd7qo")
 
 [node name="sword" type="CharacterBody2D" parent="Player"]
-position = Vector2(120, 0)
-collision_layer = 12
+position = Vector2(80, 0)
+collision_layer = 8
+collision_mask = 12
 
 [node name="sword_sprite" type="Sprite2D" parent="Player/sword"]
-position = Vector2(-50.685, 2.355)
+position = Vector2(-11.4, 2.355)
 rotation = 1.5708
 scale = Vector2(5, 5)
 texture = ExtResource("2_fw47l")
 
 [node name="sword_collision" type="CollisionShape2D" parent="Player/sword"]
-position = Vector2(-46.735, 0.05)
+position = Vector2(-11.4, 0.05)
 rotation = 1.5708
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_flh22")
+
+[node name="enemy_1" type="CharacterBody2D" parent="."]
+position = Vector2(500, 300)
+scale = Vector2(5, 5)
+collision_layer = 12
+collision_mask = 12
+
+[node name="enemy_1_sprite" type="AnimatedSprite2D" parent="enemy_1"]
+sprite_frames = SubResource("SpriteFrames_f7ng8")
+
+[node name="enemy_1_collision" type="CollisionShape2D" parent="enemy_1"]
+position = Vector2(1.49012e-08, -2.2)
+shape = SubResource("CircleShape2D_nsxkj")

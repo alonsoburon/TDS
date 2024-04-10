@@ -56,8 +56,14 @@ func _physics_process(_delta):
 	else:
 		velocity = lerp(velocity, Vector2.ZERO, friction) # If no movement detected, lerp the velocity to 0 with friction
 
-	# Calculate the target position for the sword_sprite
+	# Flip the player sprite along the y-axis based on the mouse position
 	var mouse_pos = get_global_mouse_position()
+	if mouse_pos.x < global_position.x:
+		$player_sprite.scale.x = -abs($player_sprite.scale.x)
+	else:
+		$player_sprite.scale.x = abs($player_sprite.scale.x)
+
+	# Calculate the target position for the sword_sprite
 	var sword_direction = (mouse_pos - global_position).normalized()
 	var sword_distance = min((mouse_pos - global_position).length(), 100)
 	var sword_target_position = global_position + sword_direction * sword_distance
